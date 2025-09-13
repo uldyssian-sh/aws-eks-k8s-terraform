@@ -5,3 +5,6 @@ rules:
     max: 120
   comments:
     min-spaces-from-content: 1
+  document-start: disable
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off']

@@ -1,0 +1,18 @@
+prometheus:
+  prometheusSpec:
+    retention: 30d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp2
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 50Gi
+
+grafana:
+  adminPassword: <secure-password>
+  persistence:
+    enabled: true
+    storageClassName: gp2
+    size: 10Gi

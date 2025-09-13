@@ -103,7 +103,7 @@ Your AWS user/role needs the following permissions:
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-username/aws-eks-k8s-terraform.git
+git clone https://github.com/lubomir-tobek/aws-eks-k8s-terraform.git
 cd aws-eks-k8s-terraform
 ```
 
@@ -346,7 +346,7 @@ kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80
 
 # Access at http://localhost:3000
 # Username: admin
-# Password: admin123
+# Password: <secure-password>
 ```
 
 ### Useful Monitoring Commands
