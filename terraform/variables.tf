@@ -81,8 +81,8 @@ variable "node_groups" {
     main = {
       instance_types = ["t3.medium"]
       capacity_type  = "ON_DEMAND"
-      min_size       = 1
-      max_size       = 5
+      min_size       = 3
+      max_size       = 6
       desired_size   = 3
       disk_size      = 20
       labels = {
