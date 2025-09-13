@@ -107,17 +107,26 @@ git clone https://github.com/your-username/aws-eks-k8s-terraform.git
 cd aws-eks-k8s-terraform
 ```
 
-### 2. Deploy Development Environment
+### 2. One-Click Deploy
 
 ```bash
-# Deploy with interactive prompts
-./scripts/deploy.sh -e dev
+# Deploy dev environment (one command)
+./scripts/one-click.sh deploy dev
 
-# Deploy with auto-approval
-./scripts/deploy.sh -e dev -a
+# Deploy production
+./scripts/one-click.sh deploy prod
 
-# Plan only (no deployment)
-./scripts/deploy.sh -e dev -p
+# Destroy environment
+./scripts/one-click.sh destroy dev
+```
+
+**Alternative commands:**
+```bash
+# Quick deploy only
+./scripts/quick-deploy.sh dev
+
+# Quick destroy only  
+./scripts/quick-destroy.sh dev
 ```
 
 **What gets deployed:**
