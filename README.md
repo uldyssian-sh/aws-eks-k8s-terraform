@@ -2,6 +2,8 @@
 
 🚀 **Production-ready Terraform modules for deploying Amazon EKS clusters with best practices, security, and monitoring built-in.**
 
+**Author**: LT - [GitHub Profile](https://github.com/uldyssian-sh)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Terraform](https://img.shields.io/badge/Terraform-1.5+-blue.svg)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-EKS-orange.svg)](https://aws.amazon.com/eks/)
@@ -103,7 +105,7 @@ Your AWS user/role needs the following permissions:
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/lubomir-tobek/aws-eks-k8s-terraform.git
+git clone https://github.com/uldyssian-sh/aws-eks-k8s-terraform.git
 cd aws-eks-k8s-terraform
 ```
 
