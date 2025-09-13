@@ -57,25 +57,25 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_eip" "nat" {
-  count = length(var.public_subnet_cidrs)
+  count = 3  # One EIP per NAT Gateway
 
   domain = "vpc"
 
   tags = {
-    Name = "${var.cluster_name}-nat-eip-${count.index + 1}"
+    Name = "${var.cluster_name}-nat-eip-${local.azs[count.index]}"
   }
 
   depends_on = [aws_internet_gateway.main]
 }
 
 resource "aws_nat_gateway" "main" {
-  count = length(var.public_subnet_cidrs)
+  count = 3  # One NAT Gateway per AZ for high availability
 
   allocation_id = aws_eip.nat[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
 
   tags = {
-    Name = "${var.cluster_name}-nat-${count.index + 1}"
+    Name = "${var.cluster_name}-nat-${local.azs[count.index]}"
   }
 
   depends_on = [aws_internet_gateway.main]
