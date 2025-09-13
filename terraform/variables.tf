@@ -8,7 +8,7 @@ variable "environment" {
   description = "Environment name (dev, staging, prod)"
   type        = string
   default     = "dev"
-  
+
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "Environment must be one of: dev, staging, prod."
@@ -19,7 +19,7 @@ variable "cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
   default     = "eks-cluster"
-  
+
   validation {
     condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]*$", var.cluster_name))
     error_message = "Cluster name must start with a letter and contain only alphanumeric characters and hyphens."
@@ -36,7 +36,7 @@ variable "vpc_cidr" {
   description = "CIDR block for VPC"
   type        = string
   default     = "10.0.0.0/16"
-  
+
   validation {
     condition     = can(cidrhost(var.vpc_cidr, 0))
     error_message = "VPC CIDR must be a valid IPv4 CIDR block."
@@ -66,11 +66,11 @@ variable "node_groups" {
   type = map(object({
     instance_types = list(string)
     capacity_type  = string
-    min_size      = number
-    max_size      = number
-    desired_size  = number
-    disk_size     = number
-    labels        = map(string)
+    min_size       = number
+    max_size       = number
+    desired_size   = number
+    disk_size      = number
+    labels         = map(string)
     taints = list(object({
       key    = string
       value  = string
@@ -81,10 +81,10 @@ variable "node_groups" {
     main = {
       instance_types = ["t3.medium"]
       capacity_type  = "ON_DEMAND"
-      min_size      = 1
-      max_size      = 5
-      desired_size  = 3
-      disk_size     = 20
+      min_size       = 1
+      max_size       = 5
+      desired_size   = 3
+      disk_size      = 20
       labels = {
         role = "worker"
       }

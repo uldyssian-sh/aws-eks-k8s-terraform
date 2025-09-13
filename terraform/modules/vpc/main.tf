@@ -57,7 +57,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_eip" "nat" {
-  count = 3  # One EIP per NAT Gateway
+  count = 3 # One EIP per NAT Gateway
 
   domain = "vpc"
 
@@ -69,7 +69,7 @@ resource "aws_eip" "nat" {
 }
 
 resource "aws_nat_gateway" "main" {
-  count = 3  # One NAT Gateway per AZ for high availability
+  count = 3 # One NAT Gateway per AZ for high availability
 
   allocation_id = aws_eip.nat[count.index].id
   subnet_id     = aws_subnet.public[count.index].id

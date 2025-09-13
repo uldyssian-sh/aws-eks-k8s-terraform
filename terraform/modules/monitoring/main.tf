@@ -1,7 +1,7 @@
 resource "kubernetes_namespace" "monitoring" {
   metadata {
     name = "monitoring"
-    
+
     labels = {
       name = "monitoring"
     }
@@ -36,20 +36,20 @@ resource "helm_release" "prometheus" {
           }
         }
       }
-      
+
       grafana = {
-        enabled = true
+        enabled       = true
         adminPassword = "admin123"
         persistence = {
-          enabled = true
+          enabled          = true
           storageClassName = "gp2"
-          size = "10Gi"
+          size             = "10Gi"
         }
         service = {
           type = "LoadBalancer"
         }
       }
-      
+
       alertmanager = {
         enabled = true
         alertmanagerSpec = {

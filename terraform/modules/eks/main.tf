@@ -158,10 +158,10 @@ resource "aws_security_group" "node" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "All traffic from cluster security group"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    description     = "All traffic from cluster security group"
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
     security_groups = [aws_security_group.cluster.id]
   }
 
@@ -234,20 +234,20 @@ resource "aws_eks_node_group" "main" {
 resource "aws_eks_addon" "coredns" {
   cluster_name = aws_eks_cluster.main.name
   addon_name   = "coredns"
-  
+
   depends_on = [aws_eks_node_group.main]
 }
 
 resource "aws_eks_addon" "kube_proxy" {
   cluster_name = aws_eks_cluster.main.name
   addon_name   = "kube-proxy"
-  
+
   depends_on = [aws_eks_node_group.main]
 }
 
 resource "aws_eks_addon" "vpc_cni" {
   cluster_name = aws_eks_cluster.main.name
   addon_name   = "vpc-cni"
-  
+
   depends_on = [aws_eks_node_group.main]
 }
