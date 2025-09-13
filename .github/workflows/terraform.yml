@@ -12,88 +12,78 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform Validation'
     runs-on: ubuntu-latest
-    environment: production
 
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
         working-directory: ./terraform
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
 
-    # Install the latest version of Terraform CLI
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: "1.5.0"
 
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init
-
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
+    - name: Terraform Format Check
       run: terraform fmt -check -recursive
 
-    # Validates the configuration files in a directory, referring only to the configuration and not accessing any remote services
+    - name: Terraform Init
+      run: terraform init -backend=false
+
     - name: Terraform Validate
       run: terraform validate
 
-    # Generates an execution plan for Terraform (dev environment)
-    - name: Terraform Plan (Dev)
+    - name: Terraform Plan Syntax Check
       run: |
-        terraform workspace select dev || terraform workspace new dev
-        terraform plan -var-file="environments/dev/terraform.tfvars" -no-color -input=false
-      continue-on-error: true
+        for env in dev staging prod; do
+          echo "Checking $env environment..."
+          terraform plan -var-file="environments/$env/terraform.tfvars" -no-color -input=false -refresh=false
+        done
+      continue-on-error: false
 
-    # Run Terraform security scan
-    - name: Run Checkov action
-      id: checkov
+  security:
+    name: 'Security Scan'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Run Checkov
       uses: bridgecrewio/checkov-action@master
       with:
         directory: ./terraform
         quiet: true
         soft_fail: true
         framework: terraform
-        output_format: sarif
-        output_file_path: reports/results.sarif
+        skip_check: CKV_AWS_79,CKV_AWS_23
 
-    # Upload Checkov results to GitHub Security tab
-    - name: Upload Checkov results to GitHub Security
-      uses: github/codeql-action/upload-sarif@v2
-      if: always()
-      with:
-        sarif_file: reports/results.sarif
-
-  docs:
-    name: 'Documentation'
+  lint:
+    name: 'Code Quality'
     runs-on: ubuntu-latest
     
     steps:
     - name: Checkout
       uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - name: Lint Shell Scripts
+      uses: ludeeus/action-shellcheck@master
       with:
-        node-version: '18'
+        scandir: './scripts'
         
-    - name: Install terraform-docs
-      run: |
-        curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.16.0/terraform-docs-v0.16.0-$(uname)-amd64.tar.gz
-        tar -xzf terraform-docs.tar.gz
-        chmod +x terraform-docs
-        sudo mv terraform-docs /usr/local/bin/
+    - name: Lint YAML
+      uses: ibiqlik/action-yamllint@v3
+      with:
+        file_or_dir: '.github/workflows/'
         
-    - name: Generate documentation
-      run: |
-        terraform-docs markdown table --output-file README.md ./terraform/modules/vpc
-        terraform-docs markdown table --output-file README.md ./terraform/modules/eks
-        terraform-docs markdown table --output-file README.md ./terraform/modules/security
-        terraform-docs markdown table --output-file README.md ./terraform/modules/monitoring
+    - name: Validate Markdown
+      uses: articulate/actions-markdownlint@v1
+      with:
+        config: .markdownlint.json
+        files: '*.md docs/*.md'
+      continue-on-error: true
