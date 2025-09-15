@@ -41,3 +41,14 @@ secrets/
 # Temporary files
 tmp/
 temp/
+# Performance optimization
+*.log
+*.tmp
+*.cache
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+node_modules/
+.vscode/settings.json
+.idea/
