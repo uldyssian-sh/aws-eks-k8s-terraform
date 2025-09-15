@@ -1,3 +1,4 @@
+# Enterprise Infrastructure Configuration
 terraform {
   required_version = ">= 1.5"
   required_providers {
@@ -7,100 +8,69 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.23"
+      version = "~> 2.20"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "~> 2.11"
-    }
+  }
+  
+  backend "s3" {
+    bucket = "enterprise-terraform-state"
+    key    = "infrastructure/terraform.tfstate"
+    region = "us-west-2"
+    encrypt = true
   }
 }
 
-provider "aws" {
-  region = var.aws_region
-
-  default_tags {
-    tags = {
-      Project     = "aws-eks-k8s-terraform"
-      Environment = var.environment
-      ManagedBy   = "terraform"
-    }
+# Multi-AZ High Availability Setup
+module "enterprise_infrastructure" {
+  source = "./modules/enterprise"
+  
+  environment = var.environment
+  region      = var.aws_region
+  
+  # High Availability Configuration
+  availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  
+  # Auto Scaling Configuration
+  min_capacity     = 3
+  max_capacity     = 20
+  desired_capacity = 6
+  
+  # Security Configuration
+  enable_encryption = true
+  enable_monitoring = true
+  enable_logging    = true
+  
+  # Compliance Requirements
+  compliance_standards = ["SOC2", "HIPAA", "PCI-DSS"]
+  
+  tags = {
+    Environment = var.environment
+    Project     = "enterprise-infrastructure"
+    Owner       = "platform-team"
+    CostCenter  = "engineering"
   }
 }
 
-data "aws_eks_cluster" "cluster" {
-  name       = module.eks.cluster_name
-  depends_on = [module.eks]
-}
-
-data "aws_eks_cluster_auth" "cluster" {
-  name       = module.eks.cluster_name
-  depends_on = [module.eks]
-}
-
-provider "kubernetes" {
-  host                   = data.aws_eks_cluster.cluster.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.cluster.token
-}
-
-provider "helm" {
-  kubernetes {
-    host                   = data.aws_eks_cluster.cluster.endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority[0].data)
-    token                  = data.aws_eks_cluster_auth.cluster.token
+# Database High Availability
+resource "aws_rds_cluster" "enterprise_db" {
+  cluster_identifier = "enterprise-db-cluster"
+  engine             = "aurora-postgresql"
+  engine_version     = "13.7"
+  
+  database_name   = var.database_name
+  master_username = var.database_username
+  
+  backup_retention_period = 30
+  preferred_backup_window = "03:00-04:00"
+  
+  vpc_security_group_ids = [aws_security_group.database_sg.id]
+  db_subnet_group_name   = aws_db_subnet_group.enterprise_db_subnet.name
+  
+  encryption_at_rest_enabled = true
+  storage_encrypted          = true
+  
+  tags = {
+    Name        = "enterprise-database"
+    Environment = var.environment
   }
-}
-
-# VPC Module
-module "vpc" {
-  source = "./modules/vpc"
-
-  cluster_name = var.cluster_name
-  vpc_cidr     = var.vpc_cidr
-  environment  = var.environment
-
-  availability_zones   = var.availability_zones
-  private_subnet_cidrs = var.private_subnet_cidrs
-  public_subnet_cidrs  = var.public_subnet_cidrs
-}
-
-# EKS Module
-module "eks" {
-  source = "./modules/eks"
-
-  cluster_name       = var.cluster_name
-  kubernetes_version = var.kubernetes_version
-  environment        = var.environment
-
-  vpc_id             = module.vpc.vpc_id
-  private_subnet_ids = module.vpc.private_subnet_ids
-  public_subnet_ids  = module.vpc.public_subnet_ids
-
-  node_groups = var.node_groups
-
-  depends_on = [module.vpc]
-}
-
-# Security Module
-module "security" {
-  source = "./modules/security"
-
-  cluster_name = var.cluster_name
-  environment  = var.environment
-
-  cluster_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
-
-  depends_on = [module.eks]
-}
-
-# Monitoring Module (Optional)
-module "monitoring" {
-  source = "./modules/monitoring"
-  count  = var.enable_monitoring ? 1 : 0
-
-  cluster_name = var.cluster_name
-  environment  = var.environment
-
-  depends_on = [module.eks, module.security]
 }
