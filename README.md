@@ -454,4 +454,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-⚠️ **Important**: This infrastructure creates AWS resources that incur costs. Always run the destroy scripts when done testing to avoid unexpected charges.
+⚠️ **Important**: This infrastructure creates AWS resources that incur costs.
+Always run the destroy scripts when done testing to avoid unexpected charges.
