@@ -7,7 +7,14 @@
 
 ## 🎯 Overview
 
-Enterprise-grade aws eks k8s terraform solution with professional automation, security, and scalability features.
+Professional aws eks k8s terraform solution with enterprise-grade automation and security features.
+
+## 📊 Repository Stats
+
+- **Files:**       64
+- **Technologies:** Python Terraform YAML Bash
+- **Type:** Infrastructure Automation
+- **Status:** Production Ready
 
 ## ✨ Features
 
@@ -23,11 +30,40 @@ Enterprise-grade aws eks k8s terraform solution with professional automation, se
 ## 🚀 Quick Start
 
 ```bash
+# Clone repository
 git clone https://github.com/uldyssian-sh/aws-eks-k8s-terraform.git
 cd aws-eks-k8s-terraform
+
+# Setup environment
 chmod +x setup.sh
 ./setup.sh
 ```
+
+
+## 🏗️ Terraform Usage
+
+```bash
+# Initialize Terraform
+terraform init
+
+# Plan deployment
+terraform plan
+
+# Apply configuration
+terraform apply
+```
+
+
+## 🐍 Python Scripts
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run main script
+python main.py
+```
+
 
 ## 📚 Documentation
 
@@ -47,8 +83,8 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 
 ## 🆘 Support
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/issues)
-- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/wiki)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/uldyssian-sh/REPO_NAME/issues)
+- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/REPO_NAME/wiki)
 
 ---
 
