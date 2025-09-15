@@ -1,5 +1,22 @@
 # AWS EKS Kubernetes Terraform
 
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+
+## Prerequisites
+
+Before using this project, ensure you have:
+- Required tools and dependencies
+- Proper access credentials
+- System requirements met
+
+
 🚀 **Production-ready Terraform modules for deploying Amazon EKS clusters with best practices, security, and monitoring built-in.**
 
 **Author**: LT - [GitHub Profile](https://github.com/uldyssian-sh)
@@ -456,3 +473,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ⚠️ **Important**: This infrastructure creates AWS resources that incur costs.
 Always run the destroy scripts when done testing to avoid unexpected charges.
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
+- How to submit issues
+- How to propose changes
+- Code style guidelines
+- Review process
+
+## Support
+
+- 📖 [Wiki Documentation](../../wiki)
+- 💬 [Discussions](../../discussions)
+- 🐛 [Issue Tracker](../../issues)
+- 🔒 [Security Policy](SECURITY.md)
+
+---
+**Made with ❤️ for the community**
