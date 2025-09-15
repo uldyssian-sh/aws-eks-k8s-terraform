@@ -273,7 +273,7 @@ node_groups = {
     }
     taints = []
   }
-  
+
   # Spot instances for cost optimization
   spot = {
     instance_types = ["t3.medium", "t3.large"]
@@ -293,7 +293,7 @@ node_groups = {
       }
     ]
   }
-  
+
   # GPU nodes for ML workloads
   gpu = {
     instance_types = ["g4dn.xlarge"]

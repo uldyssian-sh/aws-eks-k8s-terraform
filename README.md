@@ -127,7 +127,7 @@ cd aws-eks-k8s-terraform
 # Quick deploy only
 ./scripts/quick-deploy.sh dev
 
-# Quick destroy only  
+# Quick destroy only
 ./scripts/quick-destroy.sh dev
 ```
 
@@ -255,7 +255,7 @@ node_groups = {
     }
     taints = []
   }
-  
+
   # Spot instances for cost optimization
   spot = {
     instance_types = ["t3.medium", "t3.large"]
