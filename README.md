@@ -1,91 +1,95 @@
-# aws eks k8s terraform
+# AWS EKS Infrastructure
 
+[![CI](https://github.com/uldyssian-sh/REPO_NAME/workflows/CI/badge.svg)](https://github.com/uldyssian-sh/REPO_NAME/actions)
+[![Terraform](https://img.shields.io/badge/Terraform-1.0+-blue.svg)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-EKS-orange.svg)](https://aws.amazon.com/eks/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/aws-eks-k8s-terraform)](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/issues)
-[![GitHub stars](https://img.shields.io/github/stars/uldyssian-sh/aws-eks-k8s-terraform)](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/stargazers)
-[![Security](https://img.shields.io/badge/Security-Enterprise-blue.svg)](SECURITY.md)
 
-## 🎯 Overview
+## Overview
 
-Professional aws eks k8s terraform solution with enterprise-grade automation and security features.
+Production-ready AWS EKS cluster automation with Terraform, featuring security best practices and monitoring.
 
-## 📊 Repository Stats
+## Architecture
 
-- **Files:**       64
-- **Technologies:** Python Terraform YAML Bash
-- **Type:** Infrastructure Automation
-- **Status:** Production Ready
-
-## ✨ Features
-
-- 🏗️ **Enterprise Architecture** - Production-ready infrastructure
-- 🔒 **Zero-Trust Security** - Comprehensive security controls
-- 🚀 **CI/CD Automation** - Automated deployment pipelines
-- 📊 **Monitoring & Observability** - Complete visibility
-- 🤖 **AI Integration** - GitHub Copilot & Amazon Q
-- 🔄 **Self-Healing** - Automatic error recovery
-- 📈 **Performance Optimized** - High-performance configurations
-- 🛡️ **Compliance Ready** - SOC2, GDPR, HIPAA standards
-
-## 🚀 Quick Start
-
-```bash
-# Clone repository
-git clone https://github.com/uldyssian-sh/aws-eks-k8s-terraform.git
-cd aws-eks-k8s-terraform
-
-# Setup environment
-chmod +x setup.sh
-./setup.sh
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   VPC/Subnets   │────│   EKS Cluster   │────│   Worker Nodes  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 │
+                    ┌─────────────────┐
+                    │   Monitoring    │
+                    └─────────────────┘
 ```
 
+## Features
 
-## 🏗️ Terraform Usage
+- 🏗️ **Infrastructure as Code**: Terraform modules
+- 🔐 **Security**: IAM roles, security groups, encryption
+- 📊 **Monitoring**: CloudWatch, Prometheus, Grafana
+- 🚀 **Auto-scaling**: Cluster and pod autoscaling
+- 🔄 **CI/CD Ready**: GitHub Actions integration
+
+## Prerequisites
+
+- AWS CLI configured
+- Terraform >= 1.0
+- kubectl
+- Helm
+
+## Quick Start
 
 ```bash
+# Clone and setup
+git clone https://github.com/uldyssian-sh/REPO_NAME.git
+cd REPO_NAME
+
 # Initialize Terraform
 terraform init
 
 # Plan deployment
 terraform plan
 
-# Apply configuration
+# Deploy cluster
 terraform apply
 ```
 
+## Configuration
 
-## 🐍 Python Scripts
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Run main script
-python main.py
+```hcl
+module "eks" {
+  source = "./terraform"
+  
+  cluster_name    = "production-eks"
+  cluster_version = "1.28"
+  
+  vpc_cidr = "10.0.0.0/16"
+  
+  node_groups = {
+    main = {
+      instance_types = ["t3.medium"]
+      min_size      = 1
+      max_size      = 10
+      desired_size  = 3
+    }
+  }
+}
 ```
 
+## Documentation
 
-## 📚 Documentation
+- [Architecture Guide](docs/architecture.md)
+- [Deployment Guide](docs/deployment.md)
+- [Monitoring Setup](docs/monitoring.md)
+- [Security Hardening](docs/security.md)
 
-- [Installation Guide](docs/installation.md)
-- [Configuration Reference](docs/configuration.md)
-- [API Documentation](docs/api.md)
-- [Troubleshooting](docs/troubleshooting.md)
-- [Security Policy](SECURITY.md)
+## Monitoring
 
-## 🤝 Contributing
+Access monitoring dashboards:
+- Grafana: `kubectl port-forward svc/grafana 3000:80`
+- Prometheus: `kubectl port-forward svc/prometheus 9090:9090`
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+## License
 
-## 📄 License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
-
-## 🆘 Support
-
-- 🐛 **Issues**: [GitHub Issues](https://github.com/uldyssian-sh/REPO_NAME/issues)
-- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/REPO_NAME/wiki)
-
----
-
-⭐ **Star this repository if you find it helpful!**
+MIT License - see [LICENSE](LICENSE) file for details.
