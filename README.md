@@ -192,12 +192,6 @@ make monitoring
 
 ## Architecture
 
-<div align="center">
-  <img src="https://docs.aws.amazon.com/images/eks/latest/userguide/images/what-is-eks.png" alt="AWS EKS Architecture" width="800"/>
-</div>
-
-*Source: [AWS EKS Documentation](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)*
-
 ### Architecture Components
 
 | Component | Description | Purpose |
@@ -216,11 +210,11 @@ make monitoring
 
 | Document | Description |
 |----------|-------------|
-| [DEPLOYMENT.md](docs/DEPLOYMENT.md) | Detailed deployment guide |
-| [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Common issues and solutions |
-| [SECURITY.md](SECURITY.md) | Security policies and reporting |
-| [FREE-TIER-OPTIMIZATION.md](FREE-TIER-OPTIMIZATION.md) | Cost optimization guide |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines |
+| [Deployment Guide](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/docs/DEPLOYMENT.md) | Detailed deployment instructions |
+| [Troubleshooting](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/docs/TROUBLESHOOTING.md) | Common issues and solutions |
+| [Security Policy](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/SECURITY.md) | Security policies and reporting |
+| [Cost Optimization](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/FREE-TIER-OPTIMIZATION.md) | AWS Free Tier optimization |
+| [Contributing](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/CONTRIBUTING.md) | Contribution guidelines |
 
 ## Cost Optimization
 
@@ -307,14 +301,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Support
 
-- 🐛 **Bug Reports**: [Create Issue](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/issues/new?template=bug_report.md)
-- 💡 **Feature Requests**: [Create Issue](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/issues/new?template=feature_request.md)
-- 🔒 **Security Issues**: See [SECURITY.md](SECURITY.md)
-- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/wiki)
+- 🐛 **Bug Reports**: [Create Issue](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/issues/new?assignees=uldyssian-sh&labels=bug%2Ctriage&template=bug_report.md)
+- 💡 **Feature Requests**: [Create Issue](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/issues/new?assignees=uldyssian-sh&labels=enhancement%2Ctriage&template=feature_request.md)
+- 🔒 **Security Issues**: [Security Policy](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/SECURITY.md)
+- 📖 **Documentation**: [Repository](https://github.com/uldyssian-sh/aws-eks-k8s-terraform)
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/LICENSE) file for details.
 
 ---
 
