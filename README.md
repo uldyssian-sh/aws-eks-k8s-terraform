@@ -192,43 +192,25 @@ make monitoring
 
 ## Architecture
 
-```
-    Internet
-        │
-        ▼
-┌───────────────────────────────────────────────────────────┐
-│                      AWS VPC                             │
-│                                                           │
-│  ┌─────────────────┐           ┌─────────────────────────┐│
-│  │  Public Subnet  │           │    Private Subnets      ││
-│  │                 │           │                         ││
-│  │  ┌───────────┐  │           │  ┌─────────────────────┐││
-│  │  │    ALB    │◄─┼───────────┼─►│   EKS Control Plane │││
-│  │  └───────────┘  │           │  └─────────────────────┘││
-│  │                 │           │                         ││
-│  │  ┌───────────┐  │           │  ┌─────────────────────┐││
-│  │  │    NAT    │◄─┼───────────┼──│    Worker Nodes     │││
-│  │  │  Gateway  │  │           │  │  ┌─────┐ ┌─────┐    │││
-│  │  └───────────┘  │           │  │  │Pod A│ │Pod B│    │││
-│  │                 │           │  │  └─────┘ └─────┘    │││
-│  └─────────────────┘           │  └─────────────────────┘││
-│                                 └─────────────────────────┘│
-└───────────────────────────────────────────────────────────┘
+<div align="center">
+  <img src="https://d1.awsstatic.com/whitepapers/Overview-of-deployment-options-on-AWS.cf7facca134c8b9b0b8b4b8b8b8b8b8b8b8b8b8b.png" alt="AWS EKS Architecture" width="800"/>
+</div>
 
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│ IAM & IRSA  │  │ KMS Encrypt │  │ CloudWatch  │
-│   Roles     │  │  & Secrets  │  │ Monitoring  │
-└─────────────┘  └─────────────┘  └─────────────┘
-```
+*Source: [AWS EKS Documentation](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)*
 
-**Key Components:**
-- 🎯 **EKS Control Plane**: Managed Kubernetes API
-- 🖥️ **Worker Nodes**: EC2 instances with pods
-- 🌐 **ALB**: Load balancer for external traffic
-- 🔄 **NAT Gateway**: Internet access for private resources
-- 🔐 **IAM/IRSA**: Secure service authentication
-- 🔒 **KMS**: Encryption for data at rest
-- 📊 **CloudWatch**: Centralized logging and metrics
+### Architecture Components
+
+| Component | Description | Purpose |
+|-----------|-------------|----------|
+| 🎯 **EKS Control Plane** | Managed Kubernetes API server | Cluster management and API operations |
+| 🖥️ **Worker Nodes** | EC2 instances in Auto Scaling Groups | Run application pods and system components |
+| 🌐 **Application Load Balancer** | Layer 7 load balancer | External traffic routing to services |
+| 🔄 **NAT Gateway** | Network Address Translation | Outbound internet access for private subnets |
+| 🔐 **IAM Roles (IRSA)** | Identity and Access Management | Fine-grained permissions for pods |
+| 🔒 **KMS Encryption** | Key Management Service | Encryption for secrets and EBS volumes |
+| 📊 **CloudWatch** | Monitoring and Logging | Centralized observability and alerting |
+| 🏠 **VPC** | Virtual Private Cloud | Isolated network environment |
+| 🔒 **Security Groups** | Virtual firewalls | Network-level access control |
 
 ## Documentation
 
