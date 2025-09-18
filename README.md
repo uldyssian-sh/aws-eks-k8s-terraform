@@ -190,6 +190,12 @@ make logs
 make monitoring
 ```
 
+## Architecture Diagram
+
+![AWS EKS Architecture](docs/aws_eks_kubernetes_terraform_architecture.png)
+
+*AWS EKS cluster architecture showing control plane, worker nodes, and supporting AWS services*
+
 ## Documentation
 
 | Document | Description |
