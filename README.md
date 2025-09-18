@@ -192,7 +192,7 @@ make monitoring
 - Full monitoring stack
 - 3 availability zones
 
-See [FREE-TIER-OPTIMIZATION.md](FREE-TIER-OPTIMIZATION.md) for detailed cost breakdown.
+See [FREE-TIER-OPTIMIZATION.md](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/FREE-TIER-OPTIMIZATION.md) for detailed cost breakdown.
 
 ## Security
 
@@ -213,7 +213,7 @@ make security-scan
 checkov -d terraform/
 ```
 
-Report security issues: [SECURITY.md](SECURITY.md)
+Report security issues: [SECURITY.md](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/SECURITY.md)
 
 ## Testing
 
@@ -249,7 +249,7 @@ nslookup kubernetes.default.svc.cluster.local
 | DNS resolution | Check CoreDNS deployment |
 | Load balancer issues | Verify AWS Load Balancer Controller |
 
-See [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for detailed solutions.
+See [TROUBLESHOOTING.md](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/docs/TROUBLESHOOTING.md) for detailed solutions.
 
 ## Contributing
 
@@ -259,7 +259,7 @@ See [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for detailed solutions.
 4. Commit changes: `git commit -m "feat: add feature"`
 5. Push and create PR
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+See [CONTRIBUTING.md](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/CONTRIBUTING.md) for detailed guidelines.
 
 ## Support
 
