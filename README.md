@@ -190,11 +190,44 @@ make logs
 make monitoring
 ```
 
-## Architecture Diagram
+## Architecture
 
-![AWS EKS Architecture](docs/aws_eks_kubernetes_terraform_architecture.png)
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                           AWS Cloud                            │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │                        VPC                              │    │
+│  │  ┌─────────────────┐    ┌─────────────────────────────┐  │    │
+│  │  │  Public Subnets │    │      Private Subnets        │  │    │
+│  │  │                 │    │                             │  │    │
+│  │  │  ┌───────────┐  │    │  ┌─────────────────────────┐│  │    │
+│  │  │  │    ALB    │  │    │  │    EKS Control Plane    ││  │    │
+│  │  │  └───────────┘  │    │  └─────────────────────────┘│  │    │
+│  │  │                 │    │                             │  │    │
+│  │  │  ┌───────────┐  │    │  ┌─────────────────────────┐│  │    │
+│  │  │  │NAT Gateway│  │    │  │     Worker Nodes        ││  │    │
+│  │  │  └───────────┘  │    │  │   ┌─────┐ ┌─────┐       ││  │    │
+│  │  │                 │    │  │   │Pod 1│ │Pod 2│  ...  ││  │    │
+│  │  └─────────────────┘    │  │   └─────┘ └─────┘       ││  │    │
+│  │                         │  └─────────────────────────┘│  │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
+│  │   IAM Roles     │  │  KMS Encryption │  │   CloudWatch    │ │
+│  │   & Policies    │  │   & Secrets     │  │   Monitoring    │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-*AWS EKS cluster architecture showing control plane, worker nodes, and supporting AWS services*
+**Components:**
+- **EKS Control Plane**: Managed Kubernetes API server
+- **Worker Nodes**: EC2 instances running pods
+- **ALB**: Application Load Balancer for ingress
+- **NAT Gateway**: Outbound internet access for private subnets
+- **IAM**: Fine-grained access control with IRSA
+- **KMS**: Encryption for secrets and logs
+- **CloudWatch**: Logging and monitoring
 
 ## Documentation
 
