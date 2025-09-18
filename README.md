@@ -193,7 +193,7 @@ make monitoring
 ## Architecture
 
 <div align="center">
-  <img src="https://d1.awsstatic.com/whitepapers/Overview-of-deployment-options-on-AWS.cf7facca134c8b9b0b8b4b8b8b8b8b8b8b8b8b8b.png" alt="AWS EKS Architecture" width="800"/>
+  <img src="https://docs.aws.amazon.com/images/eks/latest/userguide/images/what-is-eks.png" alt="AWS EKS Architecture" width="800"/>
 </div>
 
 *Source: [AWS EKS Documentation](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)*
