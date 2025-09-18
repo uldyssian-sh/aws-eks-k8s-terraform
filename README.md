@@ -1,95 +1,299 @@
-# AWS EKS Infrastructure
+# AWS EKS Kubernetes Terraform
 
-[![CI](https://github.com/uldyssian-sh/REPO_NAME/workflows/CI/badge.svg)](https://github.com/uldyssian-sh/REPO_NAME/actions)
-[![Terraform](https://img.shields.io/badge/Terraform-1.0+-blue.svg)](https://www.terraform.io/)
-[![AWS](https://img.shields.io/badge/AWS-EKS-orange.svg)](https://aws.amazon.com/eks/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/workflows/CI/badge.svg)](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/actions)
+[![Terraform](https://img.shields.io/badge/Terraform-1.5+-623CE4?logo=terraform)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-EKS-FF9900?logo=amazon-aws)](https://aws.amazon.com/eks/)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-1.29+-326CE5?logo=kubernetes)](https://kubernetes.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/LICENSE)
 
 ## Overview
 
-Production-ready AWS EKS cluster automation with Terraform, featuring security best practices and monitoring.
+Enterprise-grade AWS EKS cluster deployment using Terraform with comprehensive security, monitoring, and automation.
 
 ## Architecture
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   VPC/Subnets   │────│   EKS Cluster   │────│   Worker Nodes  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         └───────────────────────┼───────────────────────┘
-                                 │
-                    ┌─────────────────┐
-                    │   Monitoring    │
-                    └─────────────────┘
+```mermaid
+graph TB
+    subgraph "AWS Cloud"
+        subgraph "VPC"
+            subgraph "Public Subnets"
+                ALB[Application Load Balancer]
+                NAT[NAT Gateway]
+            end
+            subgraph "Private Subnets"
+                EKS[EKS Control Plane]
+                WN[Worker Nodes]
+                PODS[Application Pods]
+            end
+        end
+        
+        subgraph "Security"
+            IAM[IAM Roles]
+            SG[Security Groups]
+            KMS[KMS Encryption]
+        end
+        
+        subgraph "Monitoring"
+            CW[CloudWatch]
+            PROM[Prometheus]
+            GRAF[Grafana]
+        end
+    end
+    
+    ALB --> WN
+    EKS --> WN
+    WN --> PODS
+    IAM --> EKS
+    SG --> EKS
+    KMS --> EKS
+    PROM --> GRAF
+    CW --> PROM
 ```
 
 ## Features
 
-- 🏗️ **Infrastructure as Code**: Terraform modules
-- 🔐 **Security**: IAM roles, security groups, encryption
-- 📊 **Monitoring**: CloudWatch, Prometheus, Grafana
-- 🚀 **Auto-scaling**: Cluster and pod autoscaling
-- 🔄 **CI/CD Ready**: GitHub Actions integration
+### Infrastructure
+- 🏗️ **Multi-AZ VPC** with public/private subnets
+- ⚙️ **EKS Managed Cluster** with latest Kubernetes
+- 🔄 **Auto Scaling Groups** for worker nodes
+- 🌐 **Load Balancer Controller** for ingress
+
+### Security
+- 🔐 **IAM Roles for Service Accounts (IRSA)**
+- 🛡️ **KMS Encryption** for secrets and logs
+- 🔒 **Security Groups** with least privilege
+- 📋 **Pod Security Standards** enforcement
+
+### Monitoring
+- 📊 **Prometheus** metrics collection
+- 📈 **Grafana** dashboards
+- 📝 **CloudWatch** logging
+- 🚨 **Alerting** and notifications
+
+### Automation
+- 🚀 **GitHub Actions** CI/CD
+- 🧪 **Automated Testing** with Terratest
+- 🔍 **Security Scanning** with Checkov
+- 💰 **Cost Estimation** with Infracost
 
 ## Prerequisites
 
-- AWS CLI configured
-- Terraform >= 1.0
-- kubectl
-- Helm
+| Tool | Version | Purpose |
+|------|---------|----------|
+| [AWS CLI](https://aws.amazon.com/cli/) | >= 2.0 | AWS API access |
+| [Terraform](https://www.terraform.io/) | >= 1.5 | Infrastructure provisioning |
+| [kubectl](https://kubernetes.io/docs/tasks/tools/) | >= 1.29 | Kubernetes management |
+| [Helm](https://helm.sh/) | >= 3.0 | Package management |
 
 ## Quick Start
 
+### 1. Clone Repository
 ```bash
-# Clone and setup
-git clone https://github.com/uldyssian-sh/REPO_NAME.git
-cd REPO_NAME
+git clone https://github.com/uldyssian-sh/aws-eks-k8s-terraform.git
+cd aws-eks-k8s-terraform
+```
+
+### 2. Configure AWS
+```bash
+aws configure
+# Verify access
+aws sts get-caller-identity
+```
+
+### 3. Deploy Infrastructure
+```bash
+# Check prerequisites
+make check-tools
 
 # Initialize Terraform
-terraform init
+make init
 
-# Plan deployment
-terraform plan
+# Deploy development environment
+make apply ENV=dev
 
-# Deploy cluster
-terraform apply
+# Update kubeconfig
+make kubeconfig
+
+# Verify deployment
+kubectl get nodes
 ```
 
 ## Configuration
 
+### Environment Variables
+```bash
+export AWS_REGION="eu-central-1"
+export CLUSTER_NAME="my-eks-cluster"
+export ENVIRONMENT="dev"
+```
+
+### Terraform Variables
 ```hcl
-module "eks" {
-  source = "./terraform"
-  
-  cluster_name    = "production-eks"
-  cluster_version = "1.28"
-  
-  vpc_cidr = "10.0.0.0/16"
-  
-  node_groups = {
-    main = {
-      instance_types = ["t3.medium"]
-      min_size      = 1
-      max_size      = 10
-      desired_size  = 3
-    }
+# terraform/environments/dev/terraform.tfvars
+aws_region         = "eu-central-1"
+environment        = "dev"
+cluster_name       = "eks-dev-cluster"
+kubernetes_version = "1.29"
+
+vpc_cidr = "10.0.0.0/16"
+availability_zones = [
+  "eu-central-1a",
+  "eu-central-1b"
+]
+
+node_groups = {
+  main = {
+    instance_types = ["t3.small"]
+    capacity_type  = "ON_DEMAND"
+    min_size       = 1
+    max_size       = 3
+    desired_size   = 2
+    disk_size      = 20
   }
 }
+
+enable_monitoring = false  # Cost optimization
+```
+
+## Usage Examples
+
+### Deploy Sample Application
+```bash
+# Deploy nginx example
+kubectl apply -f examples/nginx-deployment.yaml
+
+# Check deployment
+kubectl get pods,svc
+
+# Access application
+kubectl port-forward svc/nginx 8080:80
+```
+
+### Scale Cluster
+```bash
+# Scale node group
+aws eks update-nodegroup-config \
+  --cluster-name eks-dev-cluster \
+  --nodegroup-name main \
+  --scaling-config minSize=2,maxSize=5,desiredSize=3
+```
+
+### Monitor Resources
+```bash
+# Check cluster status
+make status
+
+# View logs
+make logs
+
+# Access monitoring
+make monitoring
 ```
 
 ## Documentation
 
-- [Architecture Guide](docs/architecture.md)
-- [Deployment Guide](docs/deployment.md)
-- [Monitoring Setup](docs/monitoring.md)
-- [Security Hardening](docs/security.md)
+| Document | Description |
+|----------|-------------|
+| [DEPLOYMENT.md](docs/DEPLOYMENT.md) | Detailed deployment guide |
+| [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Common issues and solutions |
+| [SECURITY.md](SECURITY.md) | Security policies and reporting |
+| [FREE-TIER-OPTIMIZATION.md](FREE-TIER-OPTIMIZATION.md) | Cost optimization guide |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines |
 
-## Monitoring
+## Cost Optimization
 
-Access monitoring dashboards:
-- Grafana: `kubectl port-forward svc/grafana 3000:80`
-- Prometheus: `kubectl port-forward svc/prometheus 9090:9090`
+### Development Environment (~$140/month)
+- Single NAT Gateway
+- t3.small instances
+- Minimal monitoring
+- 2 availability zones
+
+### Production Environment (~$460/month)
+- Multi-AZ NAT Gateways
+- Mixed instance types
+- Full monitoring stack
+- 3 availability zones
+
+See [FREE-TIER-OPTIMIZATION.md](FREE-TIER-OPTIMIZATION.md) for detailed cost breakdown.
+
+## Security
+
+### Implemented Controls
+- ✅ KMS encryption for EKS secrets
+- ✅ IAM roles with least privilege
+- ✅ Private worker node subnets
+- ✅ Security group restrictions
+- ✅ Pod security standards
+- ✅ Network policies
+
+### Security Scanning
+```bash
+# Run security scan
+make security-scan
+
+# Check compliance
+checkov -d terraform/
+```
+
+Report security issues: [SECURITY.md](SECURITY.md)
+
+## Testing
+
+### Infrastructure Tests
+```bash
+# Run validation
+make validate
+
+# Run tests
+make test
+
+# Run integration tests
+cd tests && go test -v
+```
+
+### Manual Testing
+```bash
+# Test connectivity
+kubectl run test-pod --image=busybox --rm -it -- /bin/sh
+
+# Test DNS resolution
+nslookup kubernetes.default.svc.cluster.local
+```
+
+## Troubleshooting
+
+### Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| Nodes not joining | Check IAM roles and security groups |
+| Pods pending | Verify node capacity and taints |
+| DNS resolution | Check CoreDNS deployment |
+| Load balancer issues | Verify AWS Load Balancer Controller |
+
+See [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for detailed solutions.
+
+## Contributing
+
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/my-feature`
+3. Make changes and test: `make validate test`
+4. Commit changes: `git commit -m "feat: add feature"`
+5. Push and create PR
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## Support
+
+- 🐛 **Bug Reports**: [Create Issue](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/issues/new?template=bug_report.md)
+- 💡 **Feature Requests**: [Create Issue](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/issues/new?template=feature_request.md)
+- 🔒 **Security Issues**: See [SECURITY.md](SECURITY.md)
+- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/wiki)
 
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+**Made with ❤️ by [uldyssian-sh](https://github.com/uldyssian-sh)**
