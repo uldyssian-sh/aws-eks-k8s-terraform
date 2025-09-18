@@ -12,43 +12,7 @@ Enterprise-grade AWS EKS cluster deployment using Terraform with comprehensive s
 
 ## Architecture
 
-```mermaid
-graph TB
-    subgraph "AWS Cloud"
-        subgraph "VPC"
-            subgraph "Public Subnets"
-                ALB[Application Load Balancer]
-                NAT[NAT Gateway]
-            end
-            subgraph "Private Subnets"
-                EKS[EKS Control Plane]
-                WN[Worker Nodes]
-                PODS[Application Pods]
-            end
-        end
-        
-        subgraph "Security"
-            IAM[IAM Roles]
-            SG[Security Groups]
-            KMS[KMS Encryption]
-        end
-        
-        subgraph "Monitoring"
-            CW[CloudWatch]
-            PROM[Prometheus]
-            GRAF[Grafana]
-        end
-    end
-    
-    ALB --> WN
-    EKS --> WN
-    WN --> PODS
-    IAM --> EKS
-    SG --> EKS
-    KMS --> EKS
-    PROM --> GRAF
-    CW --> PROM
-```
+AWS EKS cluster with multi-AZ deployment, security controls, and monitoring stack.
 
 ## Features
 
@@ -189,8 +153,6 @@ make logs
 # Access monitoring
 make monitoring
 ```
-
-## Architecture
 
 ### Architecture Components
 
