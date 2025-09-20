@@ -1,0 +1,40 @@
+@startuml
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v15.0/dist
+!includeurl AWSPuml/AWSCommon.puml
+!includeurl AWSPuml/Compute/all.puml
+!includeurl AWSPuml/Containers/all.puml
+!includeurl AWSPuml/NetworkingContentDelivery/all.puml
+!includeurl AWSPuml/SecurityIdentityCompliance/all.puml
+
+title AWS EKS Kubernetes Terraform Architecture
+
+rectangle "AWS Cloud" {
+  rectangle "VPC" {
+    rectangle "Public Subnets" {
+      ApplicationLoadBalancer(alb, "Application\nLoad Balancer", "")
+      NATGateway(nat, "NAT Gateway", "")
+    }
+    
+    rectangle "Private Subnets" {
+      ElasticKubernetesService(eks, "EKS Control Plane", "")
+      EC2Instance(nodes, "Worker Nodes", "")
+    }
+  }
+  
+  rectangle "Security" {
+    IAMRole(iam, "IAM Roles", "")
+    KMSKey(kms, "KMS Encryption", "")
+  }
+  
+  rectangle "Monitoring" {
+    CloudWatch(cw, "CloudWatch", "")
+  }
+}
+
+alb --> nodes
+eks --> nodes
+iam --> eks
+kms --> eks
+nodes --> cw
+
+@enduml
