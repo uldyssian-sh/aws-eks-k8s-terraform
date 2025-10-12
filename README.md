@@ -274,4 +274,4 @@ MIT License - see [LICENSE](https://github.com/uldyssian-sh/aws-eks-k8s-terrafor
 
 ---
 
-**Made with ❤️ by [uldyssian-sh](https://github.com/uldyssian-sh)**
+
