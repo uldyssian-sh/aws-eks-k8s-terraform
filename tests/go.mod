@@ -1,4 +1,4 @@
-module github.com/lubomir-tobek/aws-eks-k8s-terraform/tests
+module github.com/uldyssian-sh/aws-eks-k8s-terraform/tests
 
 go 1.21
 
