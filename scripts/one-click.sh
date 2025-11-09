@@ -18,4 +18,4 @@ case "$ACTION" in
         echo "  $0 destroy prod   # Destroy prod environment"
         exit 1
         ;;
-esac
+esac# Updated Sun Nov  9 12:50:31 CET 2025

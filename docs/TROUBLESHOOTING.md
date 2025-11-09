@@ -321,4 +321,4 @@ If you're still experiencing issues:
    - Terraform version
    - AWS CLI version
    - kubectl version
-   - Steps to reproduce
+   - Steps to reproduce# Updated Sun Nov  9 12:50:31 CET 2025

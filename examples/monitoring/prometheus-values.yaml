@@ -15,4 +15,4 @@ grafana:
   persistence:
     enabled: true
     storageClassName: gp2
-    size: 10Gi
+    size: 10Gi# Updated Sun Nov  9 12:50:31 CET 2025

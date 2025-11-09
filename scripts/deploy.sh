@@ -203,4 +203,4 @@ echo "  kubectl get pods --all-namespaces   # List all pods"
 echo "  kubectl get svc --all-namespaces    # List all services"
 echo
 print_status "To destroy the cluster, run:"
-echo "  ./scripts/destroy.sh -e $ENVIRONMENT"
+echo "  ./scripts/destroy.sh -e $ENVIRONMENT"# Updated Sun Nov  9 12:50:31 CET 2025

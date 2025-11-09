@@ -395,4 +395,4 @@ Contributors will be recognized in:
 - Release notes
 - GitHub contributors section
 
-Thank you for contributing to AWS EKS Kubernetes Terraform!
+Thank you for contributing to AWS EKS Kubernetes Terraform!# Updated Sun Nov  9 12:50:31 CET 2025

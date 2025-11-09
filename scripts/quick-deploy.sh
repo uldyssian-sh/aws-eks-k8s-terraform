@@ -17,4 +17,4 @@ aws eks update-kubeconfig --region "$AWS_REGION" --name "$CLUSTER_NAME"
 
 echo "✅ Deployment complete!"
 echo "Cluster: $CLUSTER_NAME"
-echo "Region: $AWS_REGION"
+echo "Region: $AWS_REGION"# Updated Sun Nov  9 12:50:31 CET 2025

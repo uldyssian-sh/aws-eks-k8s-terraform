@@ -276,3 +276,4 @@ MIT License - see [LICENSE](https://github.com/uldyssian-sh/aws-eks-k8s-terrafor
 
 
 # Security refresh Sun Oct 12 17:33:46 CEST 2025
+# Updated Sun Nov  9 12:50:31 CET 2025

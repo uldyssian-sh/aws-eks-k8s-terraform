@@ -29,4 +29,4 @@ for env in dev staging prod; do
     fi
 done
 
-echo "✅ All validations passed!"
+echo "✅ All validations passed!"# Updated Sun Nov  9 12:50:31 CET 2025

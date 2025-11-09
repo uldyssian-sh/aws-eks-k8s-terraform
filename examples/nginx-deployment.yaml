@@ -78,4 +78,4 @@ spec:
           service:
             name: nginx-service
             port:
-              number: 80
+              number: 80# Updated Sun Nov  9 12:50:31 CET 2025
