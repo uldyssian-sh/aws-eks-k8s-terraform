@@ -12,8 +12,8 @@ NC='\033[0m' # No Color
 
 # Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-TERRAFORM_DIR="$PROJECT_ROOT/terraform"
+PROJECT_ROOT="$(dirname ""$SCRIPT_DIR"")"
+TERRAFORM_DIR=""$PROJECT_ROOT"/terraform"
 
 # Default values
 ENVIRONMENT="dev"
@@ -85,19 +85,19 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Validate environment
-if [[ ! "$ENVIRONMENT" =~ ^(dev|staging|prod)$ ]]; then
-    print_error "Invalid environment: $ENVIRONMENT. Must be one of: dev, staging, prod"
+if [[ ! ""$ENVIRONMENT"" =~ ^(dev|staging|prod)$ ]]; then
+    print_error "Invalid environment: "$ENVIRONMENT". Must be one of: dev, staging, prod"
     exit 1
 fi
 
 # Check if environment config exists
-ENV_CONFIG="$TERRAFORM_DIR/environments/$ENVIRONMENT/terraform.tfvars"
-if [[ ! -f "$ENV_CONFIG" ]]; then
-    print_error "Environment configuration not found: $ENV_CONFIG"
+ENV_CONFIG=""$TERRAFORM_DIR"/environments/"$ENVIRONMENT"/terraform.tfvars"
+if [[ ! -f ""$ENV_CONFIG"" ]]; then
+    print_error "Environment configuration not found: "$ENV_CONFIG""
     exit 1
 fi
 
-print_status "Starting EKS deployment for environment: $ENVIRONMENT"
+print_status "Starting EKS deployment for environment: "$ENVIRONMENT""
 
 # Check prerequisites
 print_status "Checking prerequisites..."
@@ -133,7 +133,7 @@ fi
 print_success "Prerequisites check completed"
 
 # Change to terraform directory
-cd "$TERRAFORM_DIR"
+cd ""$TERRAFORM_DIR""
 
 # Initialize Terraform
 print_status "Initializing Terraform..."
@@ -147,30 +147,30 @@ terraform validate
 terraform fmt -recursive
 
 # Create workspace for environment if it doesn't exist
-if ! terraform workspace list | grep -q "$ENVIRONMENT"; then
-    print_status "Creating Terraform workspace: $ENVIRONMENT"
-    terraform workspace new "$ENVIRONMENT"
+if ! terraform workspace list | grep -q ""$ENVIRONMENT""; then
+    print_status "Creating Terraform workspace: "$ENVIRONMENT""
+    terraform workspace new ""$ENVIRONMENT""
 else
-    print_status "Selecting Terraform workspace: $ENVIRONMENT"
-    terraform workspace select "$ENVIRONMENT"
+    print_status "Selecting Terraform workspace: "$ENVIRONMENT""
+    terraform workspace select ""$ENVIRONMENT""
 fi
 
 # Plan deployment
 print_status "Planning Terraform deployment..."
-terraform plan -var-file="environments/$ENVIRONMENT/terraform.tfvars" -out="$ENVIRONMENT.tfplan"
+terraform plan -var-file="environments/"$ENVIRONMENT"/terraform.tfvars" -out=""$ENVIRONMENT".tfplan"
 
-if [[ "$PLAN_ONLY" == true ]]; then
+if [[ ""$PLAN_ONLY"" == true ]]; then
     print_success "Plan completed. Review the plan above."
     exit 0
 fi
 
 # Apply deployment
-if [[ "$AUTO_APPROVE" == true ]]; then
+if [[ ""$AUTO_APPROVE"" == true ]]; then
     print_status "Applying Terraform configuration (auto-approved)..."
-    terraform apply "$ENVIRONMENT.tfplan"
+    terraform apply ""$ENVIRONMENT".tfplan"
 else
     print_status "Applying Terraform configuration..."
-    terraform apply "$ENVIRONMENT.tfplan"
+    terraform apply ""$ENVIRONMENT".tfplan"
 fi
 
 # Get cluster information
@@ -178,13 +178,13 @@ CLUSTER_NAME=$(terraform output -raw cluster_name)
 AWS_REGION=$(terraform output -raw vpc_id | cut -d':' -f4)
 
 print_success "EKS cluster deployed successfully!"
-print_status "Cluster Name: $CLUSTER_NAME"
-print_status "Region: $AWS_REGION"
+print_status "Cluster Name: "$CLUSTER_NAME""
+print_status "Region: "$AWS_REGION""
 
 # Update kubeconfig
 if command -v kubectl &> /dev/null; then
     print_status "Updating kubeconfig..."
-    aws eks update-kubeconfig --region "$AWS_REGION" --name "$CLUSTER_NAME"
+    aws eks update-kubeconfig --region ""$AWS_REGION"" --name ""$CLUSTER_NAME""
     
     print_status "Verifying cluster access..."
     kubectl get nodes
@@ -192,7 +192,7 @@ if command -v kubectl &> /dev/null; then
     print_success "Cluster is ready!"
 else
     print_warning "kubectl not found. To connect to your cluster, run:"
-    echo "aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME"
+    echo "aws eks update-kubeconfig --region "$AWS_REGION" --name "$CLUSTER_NAME""
 fi
 
 # Show useful information
@@ -203,4 +203,4 @@ echo "  kubectl get pods --all-namespaces   # List all pods"
 echo "  kubectl get svc --all-namespaces    # List all services"
 echo
 print_status "To destroy the cluster, run:"
-echo "  ./scripts/destroy.sh -e $ENVIRONMENT"
+echo "  ./scripts/destroy.sh -e "$ENVIRONMENT""

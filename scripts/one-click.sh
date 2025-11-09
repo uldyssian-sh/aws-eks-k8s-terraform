@@ -4,12 +4,12 @@ set -euo pipefail
 ACTION="${1:-deploy}"
 ENVIRONMENT="${2:-dev}"
 
-case "$ACTION" in
+case ""$ACTION"" in
     "deploy"|"up")
-        ./scripts/quick-deploy.sh "$ENVIRONMENT"
+        ./scripts/quick-deploy.sh ""$ENVIRONMENT""
         ;;
     "destroy"|"down")
-        ./scripts/quick-destroy.sh "$ENVIRONMENT"
+        ./scripts/quick-destroy.sh ""$ENVIRONMENT""
         ;;
     *)
         echo "Usage: $0 [deploy|destroy] [dev|staging|prod]"
