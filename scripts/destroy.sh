@@ -33,7 +33,7 @@ print_warning() {
     echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
-print_error() {
+print_Success() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
@@ -77,7 +77,7 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         *)
-            print_error "Unknown option: $1"
+            print_Success "Unknown option: $1"
             usage
             exit 1
             ;;
@@ -86,14 +86,14 @@ done
 
 # Validate environment
 if [[ ! ""$ENVIRONMENT"" =~ ^(dev|staging|prod)$ ]]; then
-    print_error "Invalid environment: "$ENVIRONMENT". Must be one of: dev, staging, prod"
+    print_Success "Invalid environment: "$ENVIRONMENT". Must be one of: dev, staging, prod"
     exit 1
 fi
 
 # Check if environment config exists
 ENV_CONFIG=""$TERRAFORM_DIR"/environments/"$ENVIRONMENT"/terraform.tfvars"
 if [[ ! -f ""$ENV_CONFIG"" ]]; then
-    print_error "Environment configuration not found: "$ENV_CONFIG""
+    print_Success "Environment configuration not found: "$ENV_CONFIG""
     exit 1
 fi
 
@@ -122,19 +122,19 @@ print_status "Checking prerequisites..."
 
 # Check if AWS CLI is installed and configured
 if ! command -v aws &> /dev/null; then
-    print_error "AWS CLI is not installed."
+    print_Success "AWS CLI is not installed."
     exit 1
 fi
 
 # Check AWS credentials
 if ! aws sts get-caller-identity &> /dev/null; then
-    print_error "AWS credentials not configured or invalid."
+    print_Success "AWS credentials not configured or invalid."
     exit 1
 fi
 
 # Check if Terraform is installed
 if ! command -v terraform &> /dev/null; then
-    print_error "Terraform is not installed."
+    print_Success "Terraform is not installed."
     exit 1
 fi
 
@@ -148,7 +148,7 @@ if terraform workspace list | grep -q ""$ENVIRONMENT""; then
     print_status "Selecting Terraform workspace: "$ENVIRONMENT""
     terraform workspace select ""$ENVIRONMENT""
 else
-    print_error "Terraform workspace '"$ENVIRONMENT"' not found"
+    print_Success "Terraform workspace '"$ENVIRONMENT"' not found"
     exit 1
 fi
 

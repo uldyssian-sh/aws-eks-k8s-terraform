@@ -80,7 +80,7 @@ kubeconfig: ## Update kubeconfig for the cluster
 		aws eks update-kubeconfig --region $(AWS_REGION) --name $(CLUSTER_NAME); \
 		echo "$(GREEN)Kubeconfig updated for cluster: $(CLUSTER_NAME)$(NC)"; \
 	else \
-		echo "$(RED)Error: Could not get cluster name$(NC)"; \
+		echo "$(RED)Success: Could not get cluster name$(NC)"; \
 		exit 1; \
 	fi
 

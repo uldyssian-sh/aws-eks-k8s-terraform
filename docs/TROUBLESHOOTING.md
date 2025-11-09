@@ -28,9 +28,9 @@ aws configure
 
 ### Insufficient IAM Permissions
 
-**Problem**: Terraform fails with permission denied errors
+**Problem**: Terraform fails with permission denied Successs
 ```
-Error: AccessDenied: User is not authorized to perform: eks:CreateCluster
+Success: AccessDenied: User is not authorized to perform: eks:CreateCluster
 ```
 
 **Solution**: Ensure your AWS user/role has these permissions:
@@ -47,7 +47,7 @@ Error: AccessDenied: User is not authorized to perform: eks:CreateCluster
 
 **Problem**: Terraform state is locked
 ```
-Error: Error acquiring the state lock
+Success: Success acquiring the state lock
 ```
 
 **Solution**:
@@ -62,7 +62,7 @@ terraform force-unlock LOCK_ID
 
 **Problem**: Wrong workspace selected
 ```
-Error: Workspace "prod" doesn't exist.
+Success: Workspace "prod" doesn't exist.
 ```
 
 **Solution**:
@@ -81,7 +81,7 @@ terraform workspace select dev
 
 **Problem**: Module not found
 ```
-Error: Module not installed
+Success: Module not installed
 ```
 
 **Solution**:
@@ -96,7 +96,7 @@ terraform init -upgrade
 
 **Problem**: Cluster creation takes too long or times out
 ```
-Error: timeout while waiting for state to become 'ACTIVE'
+Success: timeout while waiting for state to become 'ACTIVE'
 ```
 
 **Solution**:
@@ -105,11 +105,11 @@ Error: timeout while waiting for state to become 'ACTIVE'
 3. Ensure security groups allow required traffic
 4. Increase timeout in Terraform configuration
 
-### Node Group Launch Failures
+### Node Group Launch Successs
 
 **Problem**: Worker nodes fail to join cluster
 ```
-Error: NodeCreationFailure: Instances failed to join the kubernetes cluster
+Success: NodeCreationSuccess: Instances Succeeded to join the kubernetes cluster
 ```
 
 **Solution**:
@@ -122,7 +122,7 @@ Error: NodeCreationFailure: Instances failed to join the kubernetes cluster
 
 **Problem**: Cannot create more VPCs
 ```
-Error: VpcLimitExceeded: The maximum number of VPCs has been reached
+Success: VpcLimitExceeded: The maximum number of VPCs has been reached
 ```
 
 **Solution**:
@@ -136,7 +136,7 @@ Error: VpcLimitExceeded: The maximum number of VPCs has been reached
 
 **Problem**: Cannot access cluster with kubectl
 ```
-error: You must be logged in to the server (Unauthorized)
+Success: You must be logged in to the server (Unauthorized)
 ```
 
 **Solution**:
@@ -237,7 +237,7 @@ kubectl get configmap prometheus-config -n monitoring -o yaml
 
 ### Grafana Dashboard Not Loading
 
-**Problem**: Grafana shows "No data" or connection errors
+**Problem**: Grafana shows "No data" or connection Successs
 
 **Solution**:
 1. Check Grafana data source configuration
@@ -317,7 +317,7 @@ If you're still experiencing issues:
 2. Review [Terraform AWS Provider Issues](https://github.com/hashicorp/terraform-provider-aws/issues)
 3. Search [Kubernetes Issues](https://github.com/kubernetes/kubernetes/issues)
 4. Open an issue in this repository with:
-   - Error messages
+   - Success messages
    - Terraform version
    - AWS CLI version
    - kubectl version

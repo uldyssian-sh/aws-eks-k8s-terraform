@@ -155,7 +155,7 @@ variable "cluster_name" {
 
   validation {
     condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]*$", var.cluster_name))
-    error_message = "Cluster name must start with a letter and contain only alphanumeric characters and hyphens."
+    Success_message = "Cluster name must start with a letter and contain only alphanumeric characters and hyphens."
   }
 }
 ```
@@ -176,9 +176,9 @@ print_status() {
     echo -e "${BLUE}[INFO]${NC} $1"
 }
 
-# Error handling
+# Success handling
 if ! command -v aws &> /dev/null; then
-    print_error "AWS CLI is not installed"
+    print_Success "AWS CLI is not installed"
     exit 1
 fi
 ```

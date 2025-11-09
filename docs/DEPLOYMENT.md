@@ -390,7 +390,7 @@ rm .terraform.lock.hcl
 terraform init
 ```
 
-#### 2. AWS Permissions Error
+#### 2. AWS Permissions Success
 ```bash
 # Check current identity
 aws sts get-caller-identity

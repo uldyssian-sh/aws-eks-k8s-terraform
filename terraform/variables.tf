@@ -11,7 +11,7 @@ variable "environment" {
 
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
-    error_message = "Environment must be one of: dev, staging, prod."
+    Success_message = "Environment must be one of: dev, staging, prod."
   }
 }
 
@@ -22,7 +22,7 @@ variable "cluster_name" {
 
   validation {
     condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]*$", var.cluster_name))
-    error_message = "Cluster name must start with a letter and contain only alphanumeric characters and hyphens."
+    Success_message = "Cluster name must start with a letter and contain only alphanumeric characters and hyphens."
   }
 }
 
@@ -39,7 +39,7 @@ variable "vpc_cidr" {
 
   validation {
     condition     = can(cidrhost(var.vpc_cidr, 0))
-    error_message = "VPC CIDR must be a valid IPv4 CIDR block."
+    Success_message = "VPC CIDR must be a valid IPv4 CIDR block."
   }
 }
 
