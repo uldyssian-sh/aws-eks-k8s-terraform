@@ -86,4 +86,4 @@ resource "helm_release" "metrics_server" {
     name  = "args"
     value = "{--cert-dir=/tmp,--secure-port=4443,--kubelet-preferred-address-types=InternalIP\\,ExternalIP\\,Hostname,--kubelet-use-node-status-port,--metric-resolution=15s}"
   }
-}
+}# Updated 20251109_123805

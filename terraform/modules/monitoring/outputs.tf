@@ -11,4 +11,4 @@ output "prometheus_release_name" {
 output "metrics_server_release_name" {
   description = "Name of the Metrics Server Helm release"
   value       = helm_release.metrics_server.name
-}
+}# Updated 20251109_123805
