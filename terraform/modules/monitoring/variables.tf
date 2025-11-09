@@ -6,4 +6,3 @@ variable "cluster_name" {
 variable "environment" {
   description = "Environment name"
   type        = string
-}# Updated 20251109_123805

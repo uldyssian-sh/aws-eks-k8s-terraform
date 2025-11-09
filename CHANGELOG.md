@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive documentation and examples
 
 ### Changed
-- Updated to Kubernetes 1.29
 - Improved security configurations
 
 ### Fixed

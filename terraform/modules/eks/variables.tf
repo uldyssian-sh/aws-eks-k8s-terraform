@@ -44,4 +44,3 @@ variable "node_groups" {
       effect = string
     }))
   }))
-}# Updated 20251109_123805
