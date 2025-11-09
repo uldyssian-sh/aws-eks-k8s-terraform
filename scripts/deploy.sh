@@ -205,3 +205,4 @@ echo
 print_status "To destroy the cluster, run:"
 echo "  ./scripts/destroy.sh -e $ENVIRONMENT"# Updated Sun Nov  9 12:50:31 CET 2025
 # Updated Sun Nov  9 12:52:07 CET 2025
+# Updated Sun Nov  9 12:56:57 CET 2025

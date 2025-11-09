@@ -339,3 +339,4 @@ resource "aws_iam_role_policy_attachment" "ebs_csi_driver" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
   role       = aws_iam_role.ebs_csi_driver.name
 }# Updated Sun Nov  9 12:52:07 CET 2025
+# Updated Sun Nov  9 12:56:57 CET 2025

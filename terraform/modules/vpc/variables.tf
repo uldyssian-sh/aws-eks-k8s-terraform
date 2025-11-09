@@ -28,3 +28,4 @@ variable "public_subnet_cidrs" {
   description = "CIDR blocks for public subnets"
   type        = list(string)
 }# Updated Sun Nov  9 12:52:07 CET 2025
+# Updated Sun Nov  9 12:56:57 CET 2025

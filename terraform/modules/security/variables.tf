@@ -12,3 +12,4 @@ variable "cluster_oidc_issuer_url" {
   description = "The URL on the EKS cluster OIDC Issuer"
   type        = string
 }# Updated Sun Nov  9 12:52:07 CET 2025
+# Updated Sun Nov  9 12:56:57 CET 2025

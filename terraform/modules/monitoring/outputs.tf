@@ -12,3 +12,4 @@ output "metrics_server_release_name" {
   description = "Name of the Metrics Server Helm release"
   value       = helm_release.metrics_server.name
 }# Updated Sun Nov  9 12:52:07 CET 2025
+# Updated Sun Nov  9 12:56:57 CET 2025

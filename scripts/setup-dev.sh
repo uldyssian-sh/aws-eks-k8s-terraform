@@ -32,3 +32,4 @@ echo "1. Configure AWS credentials: aws configure"
 echo "2. Review terraform/environments/dev/terraform.tfvars"
 echo "3. Deploy: ./scripts/deploy.sh -e dev"# Updated Sun Nov  9 12:50:31 CET 2025
 # Updated Sun Nov  9 12:52:07 CET 2025
+# Updated Sun Nov  9 12:56:57 CET 2025

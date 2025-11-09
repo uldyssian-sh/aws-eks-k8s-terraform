@@ -226,3 +226,4 @@ print_success "Destruction completed!"
 print_status "All resources for environment '$ENVIRONMENT' have been destroyed."
 print_warning "Remember to check AWS console for any remaining resources that might incur costs."# Updated Sun Nov  9 12:50:31 CET 2025
 # Updated Sun Nov  9 12:52:07 CET 2025
+# Updated Sun Nov  9 12:56:57 CET 2025
