@@ -396,3 +396,4 @@ Contributors will be recognized in:
 - GitHub contributors section
 
 Thank you for contributing to AWS EKS Kubernetes Terraform!# Updated Sun Nov  9 12:50:31 CET 2025
+# Updated Sun Nov  9 12:52:07 CET 2025

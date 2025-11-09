@@ -67,3 +67,4 @@ with Diagram("AWS EKS Kubernetes Terraform Architecture", show=False, direction=
     [nodes_a, nodes_b, nodes_c] >> iam
     [eks, nodes_a, nodes_b, nodes_c] >> cw
     [nodes_a, nodes_b, nodes_c] >> ebs# Updated Sun Nov  9 12:50:31 CET 2025
+# Updated Sun Nov  9 12:52:07 CET 2025

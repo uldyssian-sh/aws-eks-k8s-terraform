@@ -53,3 +53,4 @@ func TestTerraformEKSModule(t *testing.T) {
 	defer terraform.Destroy(t, terraformOptions)
 	terraform.InitAndPlan(t, terraformOptions)
 }# Updated Sun Nov  9 12:50:30 CET 2025
+# Updated Sun Nov  9 12:52:07 CET 2025

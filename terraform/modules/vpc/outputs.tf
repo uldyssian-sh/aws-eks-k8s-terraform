@@ -36,4 +36,4 @@ output "private_route_table_ids" {
 output "public_route_table_id" {
   description = "ID of the public route table"
   value       = aws_route_table.public.id
-}
+}# Updated Sun Nov  9 12:52:07 CET 2025

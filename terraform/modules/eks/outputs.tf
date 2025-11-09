@@ -51,4 +51,4 @@ output "node_security_group_id" {
 output "node_iam_role_arn" {
   description = "IAM role ARN associated with EKS node groups"
   value       = aws_iam_role.node.arn
-}
+}# Updated Sun Nov  9 12:52:07 CET 2025

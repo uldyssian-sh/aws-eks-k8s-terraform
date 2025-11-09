@@ -250,4 +250,4 @@ resource "aws_eks_addon" "vpc_cni" {
   addon_name   = "vpc-cni"
 
   depends_on = [aws_eks_node_group.main]
-}
+}# Updated Sun Nov  9 12:52:07 CET 2025

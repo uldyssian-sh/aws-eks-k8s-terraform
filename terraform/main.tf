@@ -103,4 +103,4 @@ module "monitoring" {
   environment  = var.environment
 
   depends_on = [module.eks, module.security]
-}
+}# Updated Sun Nov  9 12:52:07 CET 2025
