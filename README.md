@@ -4,7 +4,6 @@
 [![Terraform](https://img.shields.io/badge/Terraform-1.5+-623CE4?logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-EKS-FF9900?logo=amazon-aws)](https://aws.amazon.com/eks/)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-1.29+-326CE5?logo=kubernetes)](https://kubernetes.io/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/blob/main/LICENSE)
 
 ## Overview
 
