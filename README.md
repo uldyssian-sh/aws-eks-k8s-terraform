@@ -6,6 +6,12 @@
 [![Size](https://img.shields.io/github/repo-size/uldyssian-sh/aws-eks-k8s-terraform?style=flat-square)](#)
 [![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
 
+[![License](https://img.shields.io/github/license/uldyssian-sh/aws-eks-k8s-terraform?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
+[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/aws-eks-k8s-terraform?style=flat-square)](#)
+[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/aws-eks-k8s-terraform?style=flat-square)](#)
+[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
+
 [![CI](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/workflows/CI/badge.svg)](https://github.com/uldyssian-sh/aws-eks-k8s-terraform/actions)
 [![Terraform](https://img.shields.io/badge/Terraform-1.5+-623CE4?logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-EKS-FF9900?logo=amazon-aws)](https://aws.amazon.com/eks/)
