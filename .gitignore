@@ -61,3 +61,7 @@ node_modules/
 .env
 .env.local
 secrets/
+
+# Security - Sensitive Files
+config.json
+secrets.json
