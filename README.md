@@ -270,5 +270,4 @@ MIT License - see [LICENSE](https://github.com/uldyssian-sh/aws-eks-k8s-terrafor
 
 ---
 
-
-⭐ Star this repository if you find it helpful!
+Maintained by: uldyssian-sh⭐ Star this repository if you find it helpful!Disclaimer: Use of this code is at your own risk. Author bears no responsibility for any damages caused by the code.
